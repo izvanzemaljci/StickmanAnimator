@@ -5,7 +5,7 @@ using UnityEngine;
 public class FrameController
 {
     private static int numberOfFrames = 0;
-    private static Dictionary<int,Dictionary<string,Vector2>> frames = new Dictionary<int,Dictionary<string,Vector2>>();
+    private static Dictionary<int,Dictionary<string,Vector3>> frames = new Dictionary<int,Dictionary<string,Vector3>>();
     
     public FrameController() {
 
@@ -19,11 +19,11 @@ public class FrameController
         return numberOfFrames;
     }
 
-    public Dictionary<int,Dictionary<string,Vector2>> getFrames() {
+    public Dictionary<int,Dictionary<string,Vector3>> getFrames() {
         return frames;
     }
 
-    public void frameToDictionary(int i, Dictionary<string,Vector2> connectors) {
+    public void frameToDictionary(int i, Dictionary<string,Vector3> connectors) {
         if(frames.ContainsKey(i)){  
             frames[i] = connectors;
         } else {

@@ -5,49 +5,77 @@ using UnityEngine;
 public class Frame
 {
     //connector positions
-    Vector2 cHead;
-    Vector2 cNeckToHead;
-    Vector2 cBodyToNeck;
-    Vector2 cHandToArmR;
-    Vector2 cHandToArmL;
-    Vector2 cHandR;
-    Vector2 cHandL;
-    Vector2 cLowerBody;
-    Vector2 cLowerToUpperR;
-    Vector2 cLowerToUpperL;
-    Vector2 cFootToLowerR;
-    Vector2 cFootToLowerL;
-    Vector2 cFootR;
-    Vector2 cFootL;
-    private Dictionary<string,Vector2> connectors = default;
+    Vector3 cHead;
+    Vector3 cNeckToHead;
+    Vector3 cBodyToNeck;
+    Vector3 cHandToArmR;
+    Vector3 cHandToArmL;
+    Vector3 cHandR;
+    Vector3 cHandL;
+    Vector3 cLowerBody;
+    Vector3 cLowerToUpperR;
+    Vector3 cLowerToUpperL;
+    Vector3 cFootToLowerR;
+    Vector3 cFootToLowerL;
+    Vector3 cFootR;
+    Vector3 cFootL;
+    private Dictionary<string,Vector3> connectors = default;
 
     /* private void Start() {
         initConnectorCoords();
     } */
 
     public Frame() {
-        connectors = new Dictionary<string,Vector2>();
+        connectors = new Dictionary<string,Vector3>();
         initConnectorCoords();
     }
 
     public void initConnectorCoords() {
-        cHead = GameObject.Find("ConnectorHead").GetComponent<Rigidbody2D>().position;
-        cNeckToHead = GameObject.Find("ConnectorNeckToHead").GetComponent<Rigidbody2D>().position;
-        cBodyToNeck = GameObject.Find("ConnectorBodyToNeck").GetComponent<Rigidbody2D>().position;
-        cHandToArmR = GameObject.Find("ConnectorHandToArmR").GetComponent<Rigidbody2D>().position;
-        cHandToArmL = GameObject.Find("ConnectorHandToArmL").GetComponent<Rigidbody2D>().position;
-        cHandR = GameObject.Find("ConnectorHandR").GetComponent<Rigidbody2D>().position;
-        cHandL = GameObject.Find("ConnectorHandL").GetComponent<Rigidbody2D>().position;
-        cLowerBody = GameObject.Find("ConnectorLowerBody").GetComponent<Rigidbody2D>().position;
-        cLowerToUpperR = GameObject.Find("ConnectorLowerToUpperR").GetComponent<Rigidbody2D>().position;
-        cLowerToUpperL = GameObject.Find("ConnectorLowerToUpperL").GetComponent<Rigidbody2D>().position;
-        cFootToLowerR = GameObject.Find("ConnectorFootToLowerR").GetComponent<Rigidbody2D>().position;
-        cFootToLowerL = GameObject.Find("ConnectorFootToLowerL").GetComponent<Rigidbody2D>().position;
-        cFootR = GameObject.Find("ConnectorFootR").GetComponent<Rigidbody2D>().position;
-        cFootL = GameObject.Find("ConnectorFootL").GetComponent<Rigidbody2D>().position;
+        cHead = new Vector3(GameObject.Find("ConnectorHead").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorHead").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorHead").GetComponent<Rigidbody2D>().rotation);
+        cNeckToHead = new Vector3(GameObject.Find("ConnectorNeckToHead").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorNeckToHead").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorNeckToHead").GetComponent<Rigidbody2D>().rotation);
+        cBodyToNeck = new Vector3(GameObject.Find("ConnectorBodyToNeck").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorBodyToNeck").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorBodyToNeck").GetComponent<Rigidbody2D>().rotation);
+        cHandToArmR = new Vector3(GameObject.Find("ConnectorHandToArmR").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorHandToArmR").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorHandToArmR").GetComponent<Rigidbody2D>().rotation);
+        cHandToArmL = new Vector3(GameObject.Find("ConnectorHandToArmL").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorHandToArmL").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorHandToArmL").GetComponent<Rigidbody2D>().rotation);
+        cHandR = new Vector3(GameObject.Find("ConnectorHandR").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorHandR").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorHandR").GetComponent<Rigidbody2D>().rotation);
+        cHandL = new Vector3(GameObject.Find("ConnectorHandL").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorHandL").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorHandL").GetComponent<Rigidbody2D>().rotation);
+        cLowerBody = new Vector3(GameObject.Find("ConnectorLowerBody").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorLowerBody").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorLowerBody").GetComponent<Rigidbody2D>().rotation);
+        cLowerToUpperR = new Vector3(GameObject.Find("ConnectorLowerToUpperR").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorLowerToUpperR").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorLowerToUpperR").GetComponent<Rigidbody2D>().rotation);
+        cLowerToUpperL = new Vector3(GameObject.Find("ConnectorLowerToUpperL").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorLowerToUpperL").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorLowerToUpperL").GetComponent<Rigidbody2D>().rotation);
+        cFootToLowerR = new Vector3(GameObject.Find("ConnectorFootToLowerR").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorFootToLowerR").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorFootToLowerR").GetComponent<Rigidbody2D>().rotation);
+        cFootToLowerL = new Vector3(GameObject.Find("ConnectorFootToLowerL").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorFootToLowerL").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorFootToLowerL").GetComponent<Rigidbody2D>().rotation);
+        cFootR = new Vector3(GameObject.Find("ConnectorFootR").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorFootR").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorFootR").GetComponent<Rigidbody2D>().rotation);
+        cFootL = new Vector3(GameObject.Find("ConnectorFootL").GetComponent<Rigidbody2D>().position.x,
+        GameObject.Find("ConnectorFootL").GetComponent<Rigidbody2D>().position.y,
+        GameObject.Find("ConnectorFootL").GetComponent<Rigidbody2D>().rotation);
     }
 /* 
-    public void initConnectorCoords(Dictionary<string,Vector2> connectors) {
+    public void initConnectorCoords(Dictionary<string,Vector3> connectors) {
         cHead = connectors["cHead"];
         cNeckToHead = connectors["cNeckToHead"];
         cBodyToNeck = connectors["cBodyToNeck"];
@@ -64,22 +92,48 @@ public class Frame
         cFootL = connectors["cFootL"];
     } */
 
-    public void initConnectorCoords(Dictionary<string,Vector2> connectors) {
-        GameObject.Find("ConnectorHead").GetComponent<Rigidbody2D>().position = connectors["cHead"];
-        Debug.Log(connectors["cHead"]);
-        GameObject.Find("ConnectorNeckToHead").GetComponent<Rigidbody2D>().position = connectors["cNeckToHead"];
-        GameObject.Find("ConnectorBodyToNeck").GetComponent<Rigidbody2D>().position = connectors["cBodyToNeck"];
-        GameObject.Find("ConnectorHandToArmR").GetComponent<Rigidbody2D>().position = connectors["cHandToArmR"];
-        GameObject.Find("ConnectorHandToArmL").GetComponent<Rigidbody2D>().position = connectors["cHandToArmL"];
-        GameObject.Find("ConnectorHandR").GetComponent<Rigidbody2D>().position = connectors["cHandR"];
-        GameObject.Find("ConnectorHandL").GetComponent<Rigidbody2D>().position = connectors["cHandL"];
-        GameObject.Find("ConnectorLowerBody").GetComponent<Rigidbody2D>().position = connectors["cLowerBody"];
-        GameObject.Find("ConnectorLowerToUpperR").GetComponent<Rigidbody2D>().position = connectors["cLowerToUpperR"];
-        GameObject.Find("ConnectorLowerToUpperL").GetComponent<Rigidbody2D>().position = connectors["cLowerToUpperL"];
-        GameObject.Find("ConnectorFootToLowerR").GetComponent<Rigidbody2D>().position = connectors["cFootToLowerR"];
-        GameObject.Find("ConnectorFootToLowerL").GetComponent<Rigidbody2D>().position = connectors["cFootToLowerL"];
-        GameObject.Find("ConnectorFootR").GetComponent<Rigidbody2D>().position = connectors["cFootR"];
-        GameObject.Find("ConnectorFootL").GetComponent<Rigidbody2D>().position = connectors["cFootL"];
+    public void initConnectorCoords(Dictionary<string,Vector3> connectors) {
+        GameObject.Find("ConnectorHead").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cHead"].x, connectors["cHead"].y);
+        GameObject.Find("ConnectorHead").GetComponent<Rigidbody2D>().rotation = connectors["cHead"].z;
+
+        GameObject.Find("ConnectorNeckToHead").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cNeckToHead"].x, connectors["cNeckToHead"].y);
+        GameObject.Find("ConnectorNeckToHead").GetComponent<Rigidbody2D>().rotation = connectors["cNeckToHead"].z;
+
+        GameObject.Find("ConnectorBodyToNeck").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cBodyToNeck"].x, connectors["cBodyToNeck"].y);
+        GameObject.Find("ConnectorBodyToNeck").GetComponent<Rigidbody2D>().rotation = connectors["cBodyToNeck"].z;
+
+        GameObject.Find("ConnectorHandToArmR").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cHandToArmR"].x, connectors["cHandToArmR"].y);
+        GameObject.Find("ConnectorHandToArmR").GetComponent<Rigidbody2D>().rotation = connectors["cHandToArmR"].z;
+
+        GameObject.Find("ConnectorHandToArmL").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cHandToArmL"].x, connectors["cHandToArmL"].y);
+        GameObject.Find("ConnectorHandToArmL").GetComponent<Rigidbody2D>().rotation = connectors["cHandToArmL"].z;
+
+        GameObject.Find("ConnectorHandR").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cHandR"].x, connectors["cHandR"].y);
+        GameObject.Find("ConnectorHandR").GetComponent<Rigidbody2D>().rotation = connectors["cHandR"].z;
+
+        GameObject.Find("ConnectorHandL").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cHandL"].x, connectors["cHandL"].y);
+        GameObject.Find("ConnectorHandL").GetComponent<Rigidbody2D>().rotation = connectors["cHandL"].z;
+
+        GameObject.Find("ConnectorLowerBody").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cLowerBody"].x, connectors["cLowerBody"].y);
+        GameObject.Find("ConnectorLowerBody").GetComponent<Rigidbody2D>().rotation = connectors["cLowerBody"].z;
+
+        GameObject.Find("ConnectorLowerToUpperR").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cLowerToUpperR"].x, connectors["cLowerToUpperR"].y);
+        GameObject.Find("ConnectorLowerToUpperR").GetComponent<Rigidbody2D>().rotation = connectors["cLowerToUpperR"].z;
+
+        GameObject.Find("ConnectorLowerToUpperL").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cLowerToUpperL"].x, connectors["cLowerToUpperL"].y);
+        GameObject.Find("ConnectorLowerToUpperL").GetComponent<Rigidbody2D>().rotation = connectors["cLowerToUpperL"].z;
+        
+        GameObject.Find("ConnectorFootToLowerR").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cFootToLowerR"].x, connectors["cFootToLowerR"].y);
+        GameObject.Find("ConnectorFootToLowerR").GetComponent<Rigidbody2D>().rotation = connectors["cFootToLowerR"].z;
+        
+        GameObject.Find("ConnectorFootToLowerR").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cFootToLowerR"].x, connectors["cFootToLowerR"].y);
+        GameObject.Find("ConnectorFootToLowerR").GetComponent<Rigidbody2D>().rotation = connectors["cFootToLowerR"].z;
+        
+        GameObject.Find("ConnectorFootR").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cFootR"].x, connectors["cFootR"].y);
+        GameObject.Find("ConnectorFootR").GetComponent<Rigidbody2D>().rotation = connectors["cFootR"].z;
+        
+        GameObject.Find("ConnectorFootL").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cFootL"].x, connectors["cFootL"].y);
+        GameObject.Find("ConnectorFootL").GetComponent<Rigidbody2D>().rotation = connectors["cFootL"].z;
     }
 
     public void connectorsToDictionary() {
@@ -155,7 +209,7 @@ public class Frame
         }
     }
 
-    public Dictionary<string,Vector2> getConnectors() {
+    public Dictionary<string,Vector3> getConnectors() {
         return connectors;
     }
 }

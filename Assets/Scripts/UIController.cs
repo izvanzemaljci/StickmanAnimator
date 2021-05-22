@@ -28,6 +28,8 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Button playAnimation = null;
     [SerializeField]
+    private Button stopAnimation = null;
+    [SerializeField]
     private Button newAnimation;
     [SerializeField]
     private Button saveAnimation;
@@ -40,8 +42,6 @@ public class UIController : MonoBehaviour
     Frame frame = default;
     int currentFrame = 0;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         frameController = new FrameController();
@@ -50,22 +50,26 @@ public class UIController : MonoBehaviour
         nextFrame.onClick.AddListener(toNextFrame);
         newFrame.onClick.AddListener(addFrame);
         playAnimation.onClick.AddListener(onPlayAnimation);
+        stopAnimation.onClick.AddListener(onStopAnimation);
         savePosition.onClick.AddListener(saveCurrentPosition);
     }
 
-    // Update is called once per frame
     void Update()
     {
         frameNumber.text = currentFrame.ToString();
     }
 
     public void toPreviousFrame() {
-        currentFrame--;
+        if(currentFrame > 0) {
+            currentFrame--;
+        } 
     }
 
     public void toNextFrame() {
-        currentFrame++;
-        frame = new Frame();
+        while(currentFrame < frameController.getNumberOfFrames()) {
+            currentFrame++;
+            frame = new Frame();
+        } 
     }
 
     public void addFrame() {
@@ -77,6 +81,10 @@ public class UIController : MonoBehaviour
         StartCoroutine("startPlayingAnimation");
     }
 
+    public void onStopAnimation() {
+        StopCoroutine("startPlayingAnimation");
+    }
+
     public void saveCurrentPosition() {
         this.frame.initConnectorCoords();
         this.frame.connectorsToDictionary();
@@ -84,11 +92,14 @@ public class UIController : MonoBehaviour
     }
 
     private IEnumerator startPlayingAnimation() {
-        foreach(KeyValuePair<int, Dictionary<string,Vector2>> value in frameController.getFrames())
-        {
-            Debug.Log(value.Key); 
-            frame.initConnectorCoords(value.Value);
-            yield return new WaitForSeconds(0.5f);
+        while(true) {
+            foreach(KeyValuePair<int, Dictionary<string,Vector3>> value in frameController.getFrames())
+            {
+                Debug.Log(value.Key); 
+                currentFrame = value.Key;
+                frame.initConnectorCoords(value.Value);
+                yield return new WaitForSeconds(0.5f);
+            }
         }
     }
 }
