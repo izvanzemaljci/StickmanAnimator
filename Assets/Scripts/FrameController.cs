@@ -7,9 +7,7 @@ public class FrameController
     private static int numberOfFrames = 0;
     private static Dictionary<int,Dictionary<string,Vector3>> frames = new Dictionary<int,Dictionary<string,Vector3>>();
     
-    public FrameController() {
-
-    }
+    public FrameController() {}
 
     public void newFrame() {
         numberOfFrames++;

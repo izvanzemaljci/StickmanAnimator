@@ -2098,7 +2098,7 @@ MonoBehaviour:
   previousTimeInterval: {fileID: 1211151092}
   nextTimeInterval: {fileID: 1338501998}
   newAnimation: {fileID: 0}
-  saveAnimation: {fileID: 0}
+  saveAnimation: {fileID: 130242692}
   loadAnimation: {fileID: 0}
   frameNumber: {fileID: 1325942388}
   timeIntervalNumber: {fileID: 48640508}

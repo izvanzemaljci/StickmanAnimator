@@ -32,7 +32,7 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Button newAnimation;
     [SerializeField]
-    private Button saveAnimation;
+    private Button saveAnimation = null;
     [SerializeField]
     private Button loadAnimation;
     [SerializeField]
@@ -70,6 +70,7 @@ public class UIController : MonoBehaviour
         deleteFrame.onClick.AddListener(deleteCurrentFrame);
         previousTimeInterval.onClick.AddListener(toPreviousTimeInterval);
         nextTimeInterval.onClick.AddListener(toNextTimeInterval);
+        saveAnimation.onClick.AddListener(saveCurrentAnimation);
     }
 
     void Update()
@@ -141,6 +142,10 @@ public class UIController : MonoBehaviour
 
     public void toNextTimeInterval() {
         currentTime += 0.5f; 
+    }
+
+    public void saveCurrentAnimation() {
+        SaveManager.SaveAnimation(frameController.getFrames());
     }
 
     private IEnumerator startPlayingAnimation() {

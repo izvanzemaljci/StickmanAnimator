@@ -21,10 +21,6 @@ public class Frame
     Vector3 cFootL;
     private Dictionary<string,Vector3> connectors = default;
 
-    /* private void Start() {
-        initConnectorCoords();
-    } */
-
     public Frame() {
         connectors = new Dictionary<string,Vector3>();
         initConnectorCoords();
@@ -74,23 +70,6 @@ public class Frame
         GameObject.Find("ConnectorFootL").GetComponent<Rigidbody2D>().position.y,
         GameObject.Find("ConnectorFootL").GetComponent<Rigidbody2D>().rotation);
     }
-/* 
-    public void initConnectorCoords(Dictionary<string,Vector3> connectors) {
-        cHead = connectors["cHead"];
-        cNeckToHead = connectors["cNeckToHead"];
-        cBodyToNeck = connectors["cBodyToNeck"];
-        cHandToArmR = connectors["cHandToArmR"];
-        cHandToArmL = connectors["cHandToArmL"];
-        cHandR = connectors["cHandR"];
-        cHandL = connectors["cHandL"];
-        cLowerBody = connectors["cLowerBody"];
-        cLowerToUpperR = connectors["cLowerToUpperR"];
-        cLowerToUpperL = connectors["cLowerToUpperL"];
-        cFootToLowerR = connectors["cFootToLowerR"];
-        cFootToLowerL = connectors["cFootToLowerL"];
-        cFootR = connectors["cFootR"];
-        cFootL = connectors["cFootL"];
-    } */
 
     public void initConnectorCoords(Dictionary<string,Vector3> connectors) {
         GameObject.Find("ConnectorHead").GetComponent<Rigidbody2D>().position = new Vector2(connectors["cHead"].x, connectors["cHead"].y);
