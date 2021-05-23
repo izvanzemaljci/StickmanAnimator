@@ -23,11 +23,29 @@ public class FrameController
         return frames;
     }
 
+    public Dictionary<string,Vector3> frameAtIndex(int i) {
+        if(frames.ContainsKey(i))
+            return frames[i];
+        return null;
+    }
+
     public void frameToDictionary(int i, Dictionary<string,Vector3> connectors) {
         if(frames.ContainsKey(i)){  
             frames[i] = connectors;
         } else {
             frames.Add(i, connectors);
+        }
+    }
+
+    public bool doesFrameExist(int i) {
+        if(frames.ContainsKey(i))
+            return true;
+        return false;
+    }
+
+    public void deleteFrame(int i) {
+        if(frames.ContainsKey(i)) {
+            frames.Remove(i);
         }
     }
 }
