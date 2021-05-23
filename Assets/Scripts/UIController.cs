@@ -26,6 +26,10 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Button stopAnimation = null;
     [SerializeField]
+    private Button previousTimeInterval = null;
+    [SerializeField]
+    private Button nextTimeInterval = null;
+    [SerializeField]
     private Button newAnimation;
     [SerializeField]
     private Button saveAnimation;
@@ -33,12 +37,15 @@ public class UIController : MonoBehaviour
     private Button loadAnimation;
     [SerializeField]
     private Text frameNumber = null;
+    [SerializeField]
+    private Text timeIntervalNumber = null;
 
     FrameController frameController = default;
     Frame frame = default;
     Frame defaultFrame = default;
     Frame tempFrame = default;
     int currentFrame = 0;
+    float currentTime = 0.5f;
 
     void Start()
     {
@@ -61,11 +68,14 @@ public class UIController : MonoBehaviour
         copyPosition.onClick.AddListener(copyCurrentPosition);
         pastePosition.onClick.AddListener(pasteCopiedPosition);
         deleteFrame.onClick.AddListener(deleteCurrentFrame);
+        previousTimeInterval.onClick.AddListener(toPreviousTimeInterval);
+        nextTimeInterval.onClick.AddListener(toNextTimeInterval);
     }
 
     void Update()
     {
         frameNumber.text = currentFrame.ToString();
+        timeIntervalNumber.text = currentTime.ToString();
     }
 
     public void toPreviousFrame() {
@@ -123,6 +133,16 @@ public class UIController : MonoBehaviour
         frameController.deleteFrame(currentFrame);
     }
 
+    public void toPreviousTimeInterval() {
+        if(currentTime > 0.5f) {
+            currentTime -= 0.5f;
+        } 
+    }
+
+    public void toNextTimeInterval() {
+        currentTime += 0.5f; 
+    }
+
     private IEnumerator startPlayingAnimation() {
         while(true) {
             foreach(KeyValuePair<int, Dictionary<string,Vector3>> value in frameController.getFrames())
@@ -130,7 +150,7 @@ public class UIController : MonoBehaviour
                 Debug.Log(value.Key); 
                 currentFrame = value.Key;
                 frame.initConnectorCoords(value.Value);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(currentTime);
             }
         }
     }
