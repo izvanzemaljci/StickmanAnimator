@@ -8,11 +8,11 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Button savePosition = null;
     [SerializeField]
-    private Button copyPosition;
+    private Button copyPosition = null;
     [SerializeField]
-    private Button pastePosition;
+    private Button pastePosition = null;
     [SerializeField]
-    private Button deletePosition;
+    private Button deletePosition = null;
     [SerializeField]
     private Button previousFrame = null;
     [SerializeField]
@@ -20,11 +20,7 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Button newFrame = null;
     [SerializeField]
-    private Button deleteFrame;
-    [SerializeField]
-    private Button copyFrame;
-    [SerializeField]
-    private Button pasteFrame;
+    private Button deleteFrame = null;
     [SerializeField]
     private Button playAnimation = null;
     [SerializeField]
@@ -40,18 +36,31 @@ public class UIController : MonoBehaviour
 
     FrameController frameController = default;
     Frame frame = default;
+    Frame defaultFrame = default;
+    Frame tempFrame = default;
     int currentFrame = 0;
 
     void Start()
     {
         frameController = new FrameController();
         frame = new Frame();
+
+        defaultFrame = new Frame();
+        defaultFrame.initConnectorCoords();
+        defaultFrame.connectorsToDictionary();
+
+        tempFrame = new Frame();
+
         previousFrame.onClick.AddListener(toPreviousFrame);
         nextFrame.onClick.AddListener(toNextFrame);
         newFrame.onClick.AddListener(addFrame);
         playAnimation.onClick.AddListener(onPlayAnimation);
         stopAnimation.onClick.AddListener(onStopAnimation);
         savePosition.onClick.AddListener(saveCurrentPosition);
+        deletePosition.onClick.AddListener(deleteCurrentPosition);
+        copyPosition.onClick.AddListener(copyCurrentPosition);
+        pastePosition.onClick.AddListener(pasteCopiedPosition);
+        deleteFrame.onClick.AddListener(deleteCurrentFrame);
     }
 
     void Update()
@@ -62,17 +71,23 @@ public class UIController : MonoBehaviour
     public void toPreviousFrame() {
         if(currentFrame > 0) {
             currentFrame--;
+            if(frameController.doesFrameExist(currentFrame)) {
+                this.frame.initConnectorCoords(frameController.frameAtIndex(currentFrame));
+            } 
         } 
     }
 
     public void toNextFrame() {
-        while(currentFrame < frameController.getNumberOfFrames()) {
+        if(currentFrame < frameController.getNumberOfFrames()) {
             currentFrame++;
-            frame = new Frame();
+            if(frameController.doesFrameExist(currentFrame)) {
+                this.frame.initConnectorCoords(frameController.frameAtIndex(currentFrame));
+            }
         } 
     }
 
     public void addFrame() {
+        frame = new Frame();
         frameController.newFrame();
         currentFrame = frameController.getNumberOfFrames();
     }
@@ -88,7 +103,24 @@ public class UIController : MonoBehaviour
     public void saveCurrentPosition() {
         this.frame.initConnectorCoords();
         this.frame.connectorsToDictionary();
-        frameController.frameToDictionary(currentFrame, frame.getConnectors());
+        frameController.frameToDictionary(currentFrame, this.frame.getConnectors());
+    }
+
+    public void deleteCurrentPosition() {
+        this.frame.initConnectorCoords(defaultFrame.getConnectors());
+    }
+
+    public void copyCurrentPosition() {
+        tempFrame.initConnectorCoords();
+        tempFrame.connectorsToDictionary();
+    }
+
+    public void pasteCopiedPosition() {
+        this.frame.initConnectorCoords(tempFrame.getConnectors());
+    }
+
+    public void deleteCurrentFrame() {
+        frameController.deleteFrame(currentFrame);
     }
 
     private IEnumerator startPlayingAnimation() {
